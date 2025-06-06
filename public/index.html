@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NMI Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+  <script
+    src="https://secure.nmi.com/token/Collect.js"
+    data-tokenization-key="mDJw4m-zvyu58-n8Nwt3-3UeY54"
+    data-variant="inline"
+  ></script>
+</head>
+<body>
+  <h2>Secure Checkout</h2>
+
+  <form id="checkout-form">
+    <label for="name">Full Name</label>
+    <input type="text" name="name" id="name" required />
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required />
+
+    <label for="phone">Phone</label>
+    <input type="tel" name="phone" id="phone" />
+
+    <label for="address">Billing Address</label>
+    <input type="text" name="address" id="address" />
+
+    <label for="zip">Zip Code</label>
+    <input type="text" name="zip" id="zip" />
+
+    <label for="amount">Amount (USD)</label>
+    <input type="number" name="amount" id="amount" value="1.00" step="0.01" min="0.01" required />
+
+    <!-- Collect.js secure fields -->
+    <label>Card Number</label>
+    <div id="ccnumber" data-collect-name="ccnumber" class="collectjs-input"></div>
+
+    <label>Expiration Date</label>
+    <div id="ccexp" data-collect-name="ccexp" class="collectjs-input"></div>
+
+    <label>CVV</label>
+    <div id="cvv" data-collect-name="cvv" class="collectjs-input"></div>
+
+    <input type="hidden" name="payment_token" id="payment_token" />
+
+    <button type="button" id="pay-btn">Pay</button>
+  </form>
+
+  <div id="response-message" role="alert" aria-live="polite"></div>
+
+  <script>
+    window.addEventListener('load', () => {
+  const payBtn = document.getElementById('pay-btn');
+  const form = document.getElementById('checkout-form');
+  const responseMessage = document.getElementById('response-message');
+
+  CollectJS.configure({
+    callback: function (response) {
+      console.log('Collect.js callback response:', response);
+      if (response.error) {
+        responseMessage.textContent = "❌ Tokenization Error: " + response.error.message;
+        responseMessage.className = "error";
+        payBtn.disabled = false;
+        return;
+      }
+
+      if (!response.token) {
+        responseMessage.textContent = "❌ Tokenization incomplete: no token received yet.";
+        responseMessage.className = "error";
+        payBtn.disabled = false;
+        return;
+      }
+
+      // Got token - proceed to submit payment
+      document.getElementById('payment_token').value = response.token;
+      submitPayment();
+    }
+  });
+
+  payBtn.addEventListener('click', () => {
+    if (!form.checkValidity()) {
+      responseMessage.textContent = 'Please fill out all required fields.';
+      form.reportValidity();
+      return;
+    }
+    responseMessage.textContent = '';
+    payBtn.disabled = true;
+
+    try {
+      CollectJS.startPaymentRequest();
+      console.log('Payment tokenization started');
+    } catch (error) {
+      console.error('Error starting payment tokenization:', error);
+      responseMessage.textContent = '❌ Failed to start payment tokenization.';
+      payBtn.disabled = false;
+    }
+  });
+
+  function submitPayment() {
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value; });
+
+    fetch('/pay', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(async (res) => {
+      const result = await res.text();
+      responseMessage.innerHTML = result;
+      payBtn.disabled = false;
+      form.reset();
+    }).catch(err => {
+      console.error('Network or server error:', err);
+      responseMessage.textContent = '❌ Network Error. Please try again.';
+      payBtn.disabled = false;
+    });
+  }
+});
+
+  </script>
+</body>
+</html>
