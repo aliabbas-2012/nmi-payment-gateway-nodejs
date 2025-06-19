@@ -49,10 +49,10 @@ Now visit: https://localhost:4000
 
 
 ### Test Payments
-Use test card: 4111 1111 1111 1111
-Fill out the form
-Submit and see response
-View logs in transactions.log
+  - Use test card: 4111 1111 1111 1111
+  - Fill out the form
+  - Submit and see response
+  - View logs in transactions.log
 
 
 
