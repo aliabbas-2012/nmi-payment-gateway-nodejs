@@ -11,3 +11,8 @@
 2025-06-05T17:28:21.456Z - Umer Ghaffar - $1.00 - response=3&responsetext=Duplicate transaction REFID:337529324&authcode=&transactionid=&avsresponse=&cvvresponse=&orderid=ORD-1749144500160-929&type=sale&response_code=300
 2025-06-06T05:58:19.067Z - Umer Ghaffar - $1.00 - response=3&responsetext=Bad Request REFID:338464008&authcode=&transactionid=&avsresponse=&cvvresponse=&orderid=ORD-1749189497531-5511&type=sale&response_code=300
 2025-06-06T06:12:25.147Z - Umer Ghaffar - $1.00 - response=1&responsetext=SUCCESS&authcode=123456&transactionid=10788352934&avsresponse=N&cvvresponse=N&orderid=ORD-1749190340789-4327&type=sale&response_code=100
+2025-06-13T05:53:30.125Z - Umer Ghaffar - $1.00 - response=1&responsetext=SUCCESS&authcode=123456&transactionid=10810818475&avsresponse=N&cvvresponse=N&orderid=ORD-1749794007387-7637&type=sale&response_code=100
+2025-06-13T06:13:59.657Z - Umer Ghaffar - $1.00 - response=1&responsetext=SUCCESS&authcode=123456&transactionid=10810844969&avsresponse=N&cvvresponse=N&orderid=ORD-1749795237509-2806&type=sale&response_code=100
+2025-06-13T06:31:54.348Z - Umer Ghaffar - $1.00 - response=3&responsetext=Duplicate transaction REFID:348902034&authcode=&transactionid=&avsresponse=&cvvresponse=&orderid=ORD-1749796312664-573&type=sale&response_code=300
+2025-06-16T08:30:03.540Z - Umer Ghaffar - $1.00 - response=1&responsetext=SUCCESS&authcode=123456&transactionid=10820700170&avsresponse=N&cvvresponse=N&orderid=ORD-1750062600285-6112&type=sale&response_code=100
+2025-06-16T12:59:09.259Z - Umer Ghaffar - $1.00 - response=1&responsetext=SUCCESS&authcode=123456&transactionid=10821216565&avsresponse=N&cvvresponse=N&orderid=ORD-1750078746850-4415&type=sale&response_code=100
